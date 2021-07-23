@@ -19,6 +19,12 @@ app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 
+@app.route('/test', methods=['Get'])
+def loginAuthorization():
+    response = row = dict(
+            state='Failed', )
+    return jsonify({'response': response})
+
 @app.route('/loginAuthorization', methods=['Get'])
 def loginAuthorization():
     idUser = request.args.get('idUser')
