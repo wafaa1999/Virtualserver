@@ -20,7 +20,7 @@ mail = Mail(app)
 
 
 @app.route('/test', methods=['Get'])
-def loginAuthorization():
+def gg():
     response = row = dict(
             state='Failed', )
 
