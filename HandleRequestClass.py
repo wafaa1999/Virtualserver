@@ -7,8 +7,15 @@ from RoomClass import Room
 from UserClass import User
 from flask_mail import Mail, Message
 import random
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+cors = CORS(app, resources={
+    r"/*": {
+        "origins" : "*"
+    }
+})
 
 app.config['MAIL_SERVER'] = "smtp.gmail.com"
 app.config['MAIL_PORT'] = 465
@@ -23,7 +30,6 @@ mail = Mail(app)
 def gg():
     response = row = dict(
             state='Failed', )
-
     return jsonify({'response': response})
 
 @app.route('/loginAuthorization', methods=['Get'])
