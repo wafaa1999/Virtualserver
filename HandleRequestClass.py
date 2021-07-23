@@ -23,6 +23,7 @@ mail = Mail(app)
 def loginAuthorization():
     response = row = dict(
             state='Failed', )
+
     return jsonify({'response': response})
 
 @app.route('/loginAuthorization', methods=['Get'])
