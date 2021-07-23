@@ -13,6 +13,7 @@ class DataBase:
             result.append(i)
         return result
 
+
     def update_password_for_Inst(self, instID, passwordCode):
         oldValue = []
         newValue = []
