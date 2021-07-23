@@ -1,1 +1,1 @@
-web: gunicorn app:HandleRequest
+web: gunicorn HandleRequest:HandleRequest
