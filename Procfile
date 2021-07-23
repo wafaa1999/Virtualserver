@@ -1,1 +1,1 @@
-web: gunicorn HandleRequestClass:app --log-file -
+web: gunicorn HandleRequestClass:app
