@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 class DataBase:
     def __init__(self):
-        Client = MongoClient('mongodb://localhost:27017')
+        Client = MongoClient('mongodb+srv://WD-project:wafaa12345@cluster0.v5htd.mongodb.net/test')
         self._db = Client['Schedule']
 
     def get_data_from_user(self):
