@@ -5,12 +5,12 @@ class Course:
     def __init__(self):
         self._database = DataBase()
 
-    def get_courses(self, idIstructor, year, sem):
+    def get_courses(self, idDep, year, sem):
         response = []
         resultForOne = []
         results = [[], [], [], [], [], [], [], [], [], [], []]
-        instrctor = self._database.get_instrctor(idIstructor)
-        idDep = str(instrctor[0]['idDepartment'])
+        # instrctor = self._database.get_instrctor(idIstructor)
+        # idDep = str(instrctor[0]['idDepartment'])
         courses = self._database.get_courses_of_dep(idDep)
         flag = []
         years = []

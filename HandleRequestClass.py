@@ -75,10 +75,10 @@ def checkAndSendEmail():
 @app.route("/getMaterialsOfDepartment", methods=['GET'])
 def getMaterialsOfDepartment():
     course = Course()
-    idIstructor = request.args.get('idIstructor')
+    idDep = request.args.get('idDep')
     year = request.args.get('year')
     sem = request.args.get('sem')
-    response = course.get_courses(idIstructor, year, sem)
+    response = course.get_courses(idDep, year, sem)
     return jsonify({'response': response})
 
 
