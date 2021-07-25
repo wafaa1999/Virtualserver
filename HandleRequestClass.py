@@ -106,7 +106,7 @@ def addCourseToDepartment():
 
 
 @app.route("/editRoom", methods=['GET'])
-def redirect_editRoom():
+def editRoom():
     response =[]
     idDep = request.args.get('idDep')
     number = request.args.get('number')

@@ -11,9 +11,10 @@ class User:
         userData = self._database.get_data_from_user()
         for i in range(len(userData)):
             if idUser == userData[i]['userName'] and password == userData[i]['password']:
+                inst = self._database.get_instrctor(userData[i]['idInstructor'])
                 flag = False
                 row = dict(
-                    idIstructor=userData[i]['idInstructor'],
+                    idDep=inst[0]['idDepartment'],
                     type=userData[i]['type'])
                 response.append(row)
         if flag:
