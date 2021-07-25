@@ -119,6 +119,13 @@ def editRoom():
     response.append(row)
     return jsonify({'response': response})
 
+@app.route("/getAllMaterialsOfDepartment", methods=['GET'])
+def getAllMaterialsOfDepartment():
+    response =[]
+    idDep = request.args.get('idDep')
+    course2 = Course()
+    response = course2.get_all_materials_of_department(idDep)
+    return jsonify({'response': response})
 
 
 

@@ -141,3 +141,19 @@ class Course:
 
        return response
 
+    def get_all_materials_of_department(self, idDep):
+        response = []
+        result = self._database.get_courses_of_dep(idDep)
+        for i in range(len(result)):
+            row = dict(
+                name= result[i]['name'],
+                number=result[i]['number'],
+                year=result[i]['year'],
+                semester=result[i]['semester'],
+            )
+            response.append(row)
+
+        return response
+
+
+
