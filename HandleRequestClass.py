@@ -119,6 +119,7 @@ def editRoom():
     response.append(row)
     return jsonify({'response': response})
 
+
 @app.route("/getAllMaterialsOfDepartment", methods=['GET'])
 def getAllMaterialsOfDepartment():
     response =[]
@@ -126,6 +127,40 @@ def getAllMaterialsOfDepartment():
     course2 = Course()
     response = course2.get_all_materials_of_department(idDep)
     return jsonify({'response': response})
+
+
+@app.route("/addRoomToDepartment", methods=['GET'])
+def addRoomToDepartment():
+    response = []
+    idDep = request.args.get('idDep')
+    number = request.args.get('number')
+    type = request.args.get('type')
+    campous = request.args.get('campous')
+    room1 = Room()
+    result = room1.add_room_to_dep(idDep, number, type, campous)
+    if result == 'False':
+        row = dict(
+            stat='Done'
+        )
+        response.append(row)
+    else:
+        row1 = dict(
+            stat='Failed'
+        )
+        response.append(row1)
+    return jsonify({'response': response})
+
+@app.route("/deleteRoomFromDep", methods=['GET'])
+def deleteRoomFromDep():
+    idDep = request.args.get('idDep')
+    number = request.args.get('number')
+    room2 = Room()
+    response = room2.delete_room(idDep,number)
+    return jsonify({'response': response})
+
+
+
+
 
 
 

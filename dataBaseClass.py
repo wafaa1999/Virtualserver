@@ -13,7 +13,6 @@ class DataBase:
             result.append(i)
         return result
 
-
     def update_password_for_Inst(self, instID, passwordCode):
         oldValue = []
         newValue = []
@@ -89,3 +88,38 @@ class DataBase:
         if flag:
             return '1'
         else: return  '0'
+
+    def add_room(self,idDep, number, type, campous):
+        flag = self.check_room(number)
+        if flag == 'False':
+            collection = self._db.Room
+            row = {
+                "type": type,
+                "number": number,
+                "idDepartment": idDep,
+                "campous": campous
+            }
+            result = collection.insert_one(row)
+            return flag
+        return flag
+
+    def check_room(self, number):
+        collection = self._db.Room
+        result = []
+        for i in collection.find():
+            if i['number'] == number:
+                return 'True'
+        return 'False'
+
+    def delete_room_from_dep(self, idDep, numberr):
+        flag = False
+        collection = self._db["Room"]
+        for i in collection.find():
+            if numberr == i['number'] and idDep == i['idDepartment']:
+                reselt = collection.delete_one({"number": numberr})
+                return 'True'
+
+
+
+
+
