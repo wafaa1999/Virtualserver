@@ -9,17 +9,24 @@ class User:
         response = []
         flag = True
         userData = self._database.get_data_from_user()
+        depData = self._database.get_data_from_dep()
+
         for i in range(len(userData)):
             if idUser == userData[i]['userName'] and password == userData[i]['password']:
                 inst = self._database.get_instrctor(userData[i]['idInstructor'])
-                flag = False
-                row = dict(
-                    idDep=inst[0]['idDepartment'],
-                    type=userData[i]['type'])
-                response.append(row)
+                for j in range(len(depData)):
+                    if  inst[0]['idDepartment'] == str(depData[j]['_id']):
+                        flag = False
+                        row = dict(
+                            idDep=inst[0]['idDepartment'],
+                            type=userData[i]['type'],
+                            name=inst[0]['name'],
+                             depName=depData[j]['name'])
+                        response.append(row)
+
         if flag:
             row1 = dict(
-                idIstructor='None',
+                idDep='None',
                 type='None')
             response.append(row1)
 

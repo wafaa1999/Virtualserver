@@ -26,12 +26,6 @@ app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 
-@app.route('/test', methods=['Get'])
-def gg():
-    response = row = dict(
-            state='Failed', )
-    return jsonify({'response': response})
-
 @app.route('/loginAuthorization', methods=['Get'])
 def loginAuthorization():
     idUser = request.args.get('idUser')
@@ -150,6 +144,7 @@ def addRoomToDepartment():
         response.append(row1)
     return jsonify({'response': response})
 
+
 @app.route("/deleteRoomFromDep", methods=['GET'])
 def deleteRoomFromDep():
     response = []
@@ -164,16 +159,6 @@ def deleteRoomFromDep():
         row
     )
     return jsonify({'response': response})
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":

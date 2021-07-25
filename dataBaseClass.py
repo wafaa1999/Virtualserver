@@ -13,6 +13,22 @@ class DataBase:
             result.append(i)
         return result
 
+    def get_data_from_dep(self):
+        collection = self._db.Department
+        result = []
+        for i in collection.find():
+            result.append(i)
+        return result
+
+    def get_data_from_Inst(self):
+        collection = self._db.Instructor
+        result = []
+        for i in collection.find():
+            result.append(i)
+        return result
+
+
+
     def update_password_for_Inst(self, instID, passwordCode):
         oldValue = []
         newValue = []
