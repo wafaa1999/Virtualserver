@@ -118,7 +118,7 @@ class DataBase:
             if numberr == i['number'] and idDep == i['idDepartment']:
                 reselt = collection.delete_one({"number": numberr})
                 return 'True'
-
+        return 'False'
 
 
 

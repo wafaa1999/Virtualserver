@@ -152,10 +152,17 @@ def addRoomToDepartment():
 
 @app.route("/deleteRoomFromDep", methods=['GET'])
 def deleteRoomFromDep():
+    response = []
     idDep = request.args.get('idDep')
     number = request.args.get('number')
     room2 = Room()
-    response = room2.delete_room(idDep,number)
+    result= room2.delete_room(idDep,number)
+    row = dict(
+        stat=result
+    )
+    response.append(
+        row
+    )
     return jsonify({'response': response})
 
 
