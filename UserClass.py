@@ -32,6 +32,19 @@ class User:
 
         return response
 
+    def get_dep(self,user, passs):
+        response = []
+        result = self.check_user(user,passs)
+        if str(result[0]['idDep'] )== 'None':
+            row1 = dict(
+                idDep='None')
+            response.append(row1)
+        else:
+            row1 = dict(
+                idDep=result[0]['idDep'])
+        response.append(row1)
+        return response
+
     def check_email(self, email):
         response = []
         flag = True

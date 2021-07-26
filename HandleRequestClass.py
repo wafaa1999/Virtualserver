@@ -9,6 +9,8 @@ from flask_mail import Mail, Message
 import random
 from flask_cors import CORS
 
+from dataBaseClass import DataBase
+
 app = Flask(__name__)
 CORS(app)
 cors = CORS(app, resources={
@@ -158,6 +160,25 @@ def deleteRoomFromDep():
     response.append(
         row
     )
+    return jsonify({'response': response})
+
+
+@app.route("/getDep", methods=['GET'])
+def getDep():
+
+    user = request.args.get('username')
+    passs = request.args.get('passs')
+    data5 =User()
+    response = data5.get_dep(user,passs)
+    return jsonify({'response': response})
+
+
+@app.route("/getAllIsn", methods=['GET'])
+def getAllIsn():
+    response =[]
+    idDep = request.args.get('idDep')
+    inst2 = Instructor()
+    response = inst2.get_all_inst_of_department(idDep)
     return jsonify({'response': response})
 
 

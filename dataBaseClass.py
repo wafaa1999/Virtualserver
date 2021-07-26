@@ -49,6 +49,13 @@ class DataBase:
             result.append(i)
         return result
 
+    def get_all_Isnt(self, idDep):
+        collection = self._db.Instructor
+        result = []
+        for i in collection.find():
+            result.append(i)
+        return result
+
     def get_instrctor(self, idInstructor):
         collection = self._db.Instructor
         result = []

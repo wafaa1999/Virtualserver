@@ -149,7 +149,11 @@ class Course:
                 name= result[i]['name'],
                 number=result[i]['number'],
                 year=result[i]['year'],
+                type=result[i]['type'],
+                courseHours=result[i]['courseHours'],
+                idDepartment=result[i]['idDepartment'],
                 semester=result[i]['semester'],
+                toDepartments=result[i]['toDepartments'],
             )
             response.append(row)
 
