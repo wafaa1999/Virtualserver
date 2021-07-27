@@ -2,6 +2,7 @@ import string
 from flask import Flask, jsonify, request
 
 from CourseClass import Course
+from DepartmentClass import Department
 from InstructorClass import Instructor
 from RoomClass import Room
 from UserClass import User
@@ -173,12 +174,20 @@ def getDep():
     return jsonify({'response': response})
 
 
+
 @app.route("/getAllIsn", methods=['GET'])
 def getAllIsn():
     response =[]
     idDep = request.args.get('idDep')
     inst2 = Instructor()
     response = inst2.get_all_inst_of_department(idDep)
+    return jsonify({'response': response})
+
+
+@app.route("/getAllDep", methods=['GET'])
+def getAllDep():
+    dep = Department()
+    response =dep.get_all_dep()
     return jsonify({'response': response})
 
 
