@@ -132,7 +132,7 @@ class Course:
        flag = True
        result = self._database.get_course_of_dep(idDep)
        for i in range(len(result)):
-           if result[i]['number'] == number:
+           if result[i]['number'] == number and idDep == result[i]['idDepartment']:
                flag = False
        if flag:
            response = self._database.add_course_to_dep(idDep, name, number, numberOfHour, type, year, sem, flag,toDepartments)
