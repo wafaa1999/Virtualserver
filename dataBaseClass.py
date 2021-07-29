@@ -78,7 +78,17 @@ class DataBase:
             result.append(i)
         return result
 
-    def add_course_to_dep(self, idDep, name, number, numberOfHour, type, year, sem):
+    def add_course_to_dep(self, idDep, name, number, numberOfHour, type, year, sem, flag,toDepartments):
+        if flag == '0':
+            flagFrom = 'false'
+            flagTo = 'false'
+        elif flag == '1':
+            flagFrom = 'true'
+            flagTo = 'false'
+        else:
+            flagFrom = 'false'
+            flagTo = 'true'
+
         collection = self._db.Course
         row = {
             "name": name,
@@ -88,7 +98,9 @@ class DataBase:
             "year": year,
             "idDepartment": idDep,
             "semester": sem,
-            "toDepartments": idDep,
+            "toDepartments": toDepartments,
+            "flagFrom": flagFrom,
+            "flagTo": flagTo,
         }
 
         result = collection.insert_one(row)
@@ -143,6 +155,9 @@ class DataBase:
                 return 'True'
         return 'False'
 
+    # def updatcourse(self):
+    #     collection = self._db["Course"]
+    #     collection.update_many({}, {"$set": {"flagTo": "false"}}, upsert=False, array_filters=None)
 
 
-
+# d = DataBase().updatcourse()

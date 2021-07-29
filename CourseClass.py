@@ -127,7 +127,7 @@ class Course:
 
         return response
 
-    def add_course_to_dep(self, idDep, name, number, numberOfHour, type, year, sem):
+    def add_course_to_dep(self, idDep, name, number, numberOfHour, type, year, sem,toDepartments , flag):
        response = []
        flag = True
        result = self._database.get_course_of_dep(idDep)
@@ -135,7 +135,7 @@ class Course:
            if result[i]['number'] == number:
                flag = False
        if flag:
-           response = self._database.add_course_to_dep(idDep, name, number, numberOfHour, type, year, sem)
+           response = self._database.add_course_to_dep(idDep, name, number, numberOfHour, type, year, sem, flag,toDepartments)
        else:
            response.append("0")
 
@@ -155,6 +155,8 @@ class Course:
                     idDepartment=result[i]['idDepartment'],
                     semester=result[i]['semester'],
                     toDepartments=result[i]['toDepartments'],
+                    flagFrom=result[i]['flagFrom'],
+                    flagTo=result[i]['flagTo'],
                 )
                 response.append(row)
 
