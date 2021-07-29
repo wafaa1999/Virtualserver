@@ -145,7 +145,7 @@ class Course:
         response = []
         result = self._database.get_courses_of_dep(idDep)
         for i in range(len(result)):
-            if idDep == str(result[i]['_id']):
+            if idDep == str(result[i]['idDepartment']):
                 row = dict(
                     name=result[i]['name'],
                     number=result[i]['number'],
