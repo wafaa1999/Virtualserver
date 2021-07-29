@@ -145,17 +145,19 @@ class Course:
         response = []
         result = self._database.get_courses_of_dep(idDep)
         for i in range(len(result)):
-            row = dict(
-                name= result[i]['name'],
-                number=result[i]['number'],
-                year=result[i]['year'],
-                type=result[i]['type'],
-                courseHours=result[i]['courseHours'],
-                idDepartment=result[i]['idDepartment'],
-                semester=result[i]['semester'],
-                toDepartments=result[i]['toDepartments'],
-            )
-            response.append(row)
+            if idDep == str(result[i]['_id']):
+                row = dict(
+                    name=result[i]['name'],
+                    number=result[i]['number'],
+                    year=result[i]['year'],
+                    type=result[i]['type'],
+                    courseHours=result[i]['courseHours'],
+                    idDepartment=result[i]['idDepartment'],
+                    semester=result[i]['semester'],
+                    toDepartments=result[i]['toDepartments'],
+                )
+                response.append(row)
+
 
         return response
 

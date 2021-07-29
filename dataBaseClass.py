@@ -42,7 +42,7 @@ class DataBase:
                      }, upsert=True
                 )
 
-    def get_courses_of_dep(self, toDepartments):
+    def get_courses_of_dep(self, idDep):
         collection = self._db.Course
         result = []
         for i in collection.find().sort("year"):

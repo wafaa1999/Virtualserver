@@ -9,10 +9,12 @@ class Instructor:
         response = []
         result = self._database.get_all_Isnt(idDep)
         for i in range(len(result)):
-            row = dict(
-                name=result[i]['name'],
-                idDepartment=result[i]['idDepartment'],
-            )
-            response.append(row)
+            if idDep == result[i]['idDepartment']:
+                row = dict(
+                    name=result[i]['name'],
+                    idDepartment=result[i]['idDepartment'],
+                )
+                response.append(row)
+
 
         return response
