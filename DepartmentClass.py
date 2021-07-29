@@ -10,8 +10,8 @@ class Department:
         result = self._database.get_data_from_dep()
         for i in range(len(result)):
             row = dict(
-                name=str(result[i]['_id']),
-                idDepartment=result[i]['name'],
+                idDepartment=str(result[i]['_id']),
+                name=result[i]['name'],
             )
             response.append(row)
 
