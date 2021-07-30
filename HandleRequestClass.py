@@ -192,6 +192,14 @@ def getAllDep():
     response =dep.get_all_dep()
     return jsonify({'response': response})
 
+@app.route("/getMatOfSpeDep", methods=['GET'])
+def getMatOfSpeDep():
+    idDep = request.args.get('idDep')
+    id = request.args.get('id')
+    response = Course().get_all_materials_of_sep_dep(idDep,id)
+    return jsonify({'response': response})
+
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True ,port= 3500)

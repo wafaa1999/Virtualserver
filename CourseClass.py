@@ -163,5 +163,17 @@ class Course:
 
         return response
 
+    def get_all_materials_of_sep_dep(self, idDep, id):
+        response = []
+        result = self._database.get_courses_of_dep(idDep)
+        for i in range(len(result)):
+            if idDep == str(result[i]['idDepartment']) and id == str(result[i]['toDepartments']):
+                row = dict(
+                    name=result[i]['name'],
+
+                )
+                response.append(row)
+
+        return response
 
 
