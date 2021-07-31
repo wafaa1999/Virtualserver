@@ -22,8 +22,8 @@ class Room:
        result = self._database.update_data_for_room(idDep,number,campous,type)
        return result
 
-    def add_room_to_dep(self, idDep, number, type, campous):
-        result = self._database.add_room(idDep, number, type, campous)
+    def add_room_to_dep(self, idDep, number, type, campous, name):
+        result = self._database.add_room(idDep, number, type, campous, name)
         return result
 
     def delete_room(self, idDep, number):
