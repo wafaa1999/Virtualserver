@@ -13,13 +13,14 @@ class Room:
                 row = dict(
                     number=rooms[i]['number'],
                     type=rooms[i]['type'],
-                    campous=rooms[i]['campous']
+                    campous=rooms[i]['campous'],
+                    name=rooms[i]['name']
                 )
                 response.append(row)
         return response
 
-    def update_room(self,idDep,number,campous,type):
-       result = self._database.update_data_for_room(idDep,number,campous,type)
+    def update_room(self,idDep,number,campous,type, name):
+       result = self._database.update_data_for_room(idDep,number,campous,type, name)
        return result
 
     def add_room_to_dep(self, idDep, number, type, campous, name):

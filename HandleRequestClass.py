@@ -111,8 +111,10 @@ def editRoom():
     number = request.args.get('number')
     campous = request.args.get('campous')
     type = request.args.get('type')
+    name = request.args.get('name')
+
     room1 = Room()
-    result = room1.update_room(idDep,number,campous,type)
+    result = room1.update_room(idDep,number,campous,type, name)
     row = dict(
         state=result, )
     response.append(row)

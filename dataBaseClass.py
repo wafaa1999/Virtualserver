@@ -107,7 +107,7 @@ class DataBase:
         flag: str = '1'
         return flag
 
-    def update_data_for_room(self,idDep,number,campous,type):
+    def update_data_for_room(self,idDep,number,campous,type, name):
         flag = False
         collection = self._db["Room"]
         for i in collection.find():
@@ -117,7 +117,8 @@ class DataBase:
                     {"number": number},
                     {"$set":
                          {"campous": campous,
-                          "type":type}
+                          "type":type,
+                          "name":name}
                      }, upsert=True
                 )
         if flag:
