@@ -135,8 +135,9 @@ def addRoomToDepartment():
     number = request.args.get('number')
     type = request.args.get('type')
     campous = request.args.get('campous')
+    name = request.args.get('name')
     room1 = Room()
-    result = room1.add_room_to_dep(idDep, number, type, campous)
+    result = room1.add_room_to_dep(idDep, number, type, campous, name)
     if result == 'False':
         row = dict(
             stat='Done'

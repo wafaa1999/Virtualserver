@@ -124,7 +124,7 @@ class DataBase:
             return '1'
         else: return  '0'
 
-    def add_room(self,idDep, number, type, campous):
+    def add_room(self,idDep, number, type, campous, name):
         flag = self.check_room(number)
         if flag == 'False':
             collection = self._db.Room
@@ -132,7 +132,8 @@ class DataBase:
                 "type": type,
                 "number": number,
                 "idDepartment": idDep,
-                "campous": campous
+                "campous": campous,
+                "name": name
             }
             result = collection.insert_one(row)
             return flag
