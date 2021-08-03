@@ -19,6 +19,17 @@ class Room:
                 response.append(row)
         return response
 
+    def getCat(self, idDep):
+        cat = []
+        rooms = self._database.get_room()
+
+        for i in range(len(rooms)):
+            if rooms[i]['name'] != 'قاعة تدريس' and idDep == rooms[i]['idDepartment'] :
+                row = dict(
+                    name=rooms[i]['name'])
+                cat.append(row)
+        return cat
+
     def update_room(self,idDep,number,campous,type, name):
        result = self._database.update_data_for_room(idDep,number,campous,type, name)
        return result

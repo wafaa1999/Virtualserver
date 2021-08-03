@@ -203,6 +203,12 @@ def getMatOfSpeDep():
     return jsonify({'response': response})
 
 
+@app.route("/getRoomCat", methods=['GET'])
+def getRoomCat():
+    idDep = request.args.get('idDep')
+    room1 = Room()
+    response = room1.getCat(idDep)
+    return jsonify({'response': response})
 
 if __name__ == "__main__":
     app.run(debug=True ,port= 3500)
