@@ -12,6 +12,7 @@ class Department:
             row = dict(
                 idDepartment=str(result[i]['_id']),
                 name=result[i]['name'],
+                sections=result[i]['sections']
             )
             response.append(row)
 

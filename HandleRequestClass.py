@@ -97,10 +97,11 @@ def addCourseToDepartment():
     year = request.args.get('year')
     sem = request.args.get('sem')
     flag = request.args.get('flag')
+    specialty = request.args.get('specialty')
     toDepartments = request.args.get('toDepartments')
     course = Course()
     response = course.add_course_to_dep(idDep, name, number, numberOfHour,
-                                          type, year, sem, flag,toDepartments)
+                                          type, year, sem, flag,toDepartments,specialty)
     return jsonify({'response': response})
 
 
