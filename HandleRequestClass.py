@@ -219,5 +219,14 @@ def addInstToDepartment():
     response = Instructor().add_Inst_to_dep(idDep, name)
     return jsonify({'response': response})
 
+@app.route("/deleteInsFromDep", methods=['GET'])
+def deleteInstFromDep():
+    idDep = request.args.get('idDep')
+    name = request.args.get('name')
+    response = Instructor().delete_Inst_to_dep(idDep, name)
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True ,port= 3500)

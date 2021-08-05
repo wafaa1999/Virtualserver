@@ -169,6 +169,19 @@ class DataBase:
                 return 'True'
         return 'False'
 
+    def delete_inst_to_deprtment(self, idDep, name):
+        response = []
+        collection = self._db.Instructor
+
+        collection.delete_one({"idDep": idDep,
+                               "name": name
+                               })
+        row = {
+            "flag": 'true', }
+        response.append(row)
+        return response
+
+
 #     def updatcourse(self):
 #         collection = self._db["Room"]
 #         collection.update_many({}, {"$set": {"name": "قاعة تدريس"}}, upsert=False, array_filters=None)
