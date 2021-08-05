@@ -169,9 +169,9 @@ class DataBase:
                 return 'True'
         return 'False'
 
-    def updatcourse(self):
-        collection = self._db["Room"]
-        collection.update_many({}, {"$set": {"name": "قاعة تدريس"}}, upsert=False, array_filters=None)
-
-
-d = DataBase().updatcourse()
+#     def updatcourse(self):
+#         collection = self._db["Room"]
+#         collection.update_many({}, {"$set": {"name": "قاعة تدريس"}}, upsert=False, array_filters=None)
+#
+#
+# d = DataBase().updatcourse()
