@@ -16,6 +16,6 @@ class Instructor:
                 )
                 response.append(row)
 
-    def add_inst_to_dep(self, idDep, name):
+    def add_Inst_to_dep(self, idDep, name):
         response = self._database.add_inst_to_deprtment( idDep, name)
         return response
