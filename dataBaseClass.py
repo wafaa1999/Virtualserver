@@ -7,7 +7,7 @@ class DataBase:
         self._db = Client['Schedule']
 
     def add_inst_to_deprtment(self, idDep, name):
-        collection = self._db.Inst
+        collection = self._db.Instructor
         row = {
             "idDepartment": idDep,
             "name": name
