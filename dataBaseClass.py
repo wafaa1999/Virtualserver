@@ -6,6 +6,17 @@ class DataBase:
         Client = MongoClient('mongodb+srv://WD-project:wafaa12345@cluster0.v5htd.mongodb.net/test')
         self._db = Client['Schedule']
 
+    def add_inst_to_deprtment(self, idDep, name):
+        collection = self._db.Inst
+        row = {
+            "idDepartment": idDep,
+            "name": name
+        }
+        result = collection.insert_one(row)
+        return 'true'
+
+
+
     def get_data_from_user(self):
         collection = self._db.User
         result = []

@@ -211,5 +211,13 @@ def getRoomCat():
     response = room1.getCat(idDep)
     return jsonify({'response': response})
 
+@app.route("/addInstToDepartment", methods=['GET'])
+def addInstToDepartment():
+    response = []
+    idDep = request.args.get('idDep')
+    name = request.args.get('name')
+    response = Instructor().add_Inst_to_dep(idDep, name)
+    return jsonify({'response': response})
+
 if __name__ == "__main__":
     app.run(debug=True ,port= 3500)
