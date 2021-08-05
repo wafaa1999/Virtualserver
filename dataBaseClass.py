@@ -173,7 +173,7 @@ class DataBase:
         response = []
         collection = self._db.Instructor
 
-        collection.delete_one({"idDepartment": idDep,
+        result = collection.delete_one({"idDepartment": idDep,
                                "name": name
                                })
         row = {
