@@ -224,6 +224,7 @@ def deleteInstFromDep():
     idDep = request.args.get('idDep')
     name = request.args.get('name')
     response = Instructor().delete_Inst_to_dep(idDep, name)
+    return jsonify({'response': response})
 
 
 
