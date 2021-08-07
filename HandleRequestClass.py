@@ -226,6 +226,14 @@ def deleteInstFromDep():
     response = Instructor().delete_Inst_to_dep(idDep, name)
     return jsonify({'response': response})
 
+@app.route("/deleteCourseFromDep", methods=['GET'])
+def deleteCourseFromDep():
+    idDep = request.args.get('toDepartments')
+    number = request.args.get('number')
+    response = Course().delete_Course_from_dep(idDep, number)
+    return jsonify({'response': response})
+
+
 
 
 

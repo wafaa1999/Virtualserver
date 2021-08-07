@@ -176,4 +176,7 @@ class Course:
 
         return response
 
+    def delete_Course_from_dep(self, idDep, number):
+        result = self._database.delete_Course_from_department(idDep, number)
+        return result
 

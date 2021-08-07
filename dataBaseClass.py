@@ -181,6 +181,16 @@ class DataBase:
         response.append(row)
         return response
 
+    def delete_Course_from_department(self, idDep, number):
+        response = []
+        collection = self._db.Course
+
+        result = collection.delete_one({"toDepartments": idDep,
+                                        "number": number})
+        row = {
+            "flag": 'true', }
+        response.append(row)
+        return response
 
 #     def updatcourse(self):
 #         collection = self._db["Room"]
