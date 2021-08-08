@@ -8,14 +8,21 @@ class DataBase:
 
     def add_inst_to_deprtment(self, idDep, name):
         collection = self._db.Instructor
-        row = {
-            "idDepartment": idDep,
-            "name": name
-        }
-        result = collection.insert_one(row)
-        return 'true'
+        flag = True
+        res = self.get_data_from_Inst()
+        for i in range(len(res)):
+            if res[i]['name'] == name and res[i]['idDep'] == idDep:
+                flag = False
 
-
+        if flag:
+            row = {
+                "idDepartment": idDep,
+                "name": name
+            }
+            result = collection.insert_one(row)
+            return 'true'
+        else:
+          return 'false'
 
     def get_data_from_user(self):
         collection = self._db.User
