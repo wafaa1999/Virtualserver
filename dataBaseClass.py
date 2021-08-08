@@ -11,7 +11,7 @@ class DataBase:
         flag = True
         res = self.get_data_from_Inst()
         for i in range(len(res)):
-            if res[i]['name'] == name and res[i]['idDep'] == idDep:
+            if res[i]['name'] == name and res[i]['idDepartment'] == idDep:
                 flag = False
 
         if flag:
