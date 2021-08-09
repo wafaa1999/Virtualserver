@@ -22,7 +22,6 @@ class Room:
     def getCat(self, idDep):
         cat = []
         rooms = self._database.get_room()
-
         for i in range(len(rooms)):
             if rooms[i]['name'] != 'قاعة تدريس' and idDep == rooms[i]['idDepartment'] :
                 row = dict(

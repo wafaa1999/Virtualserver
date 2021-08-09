@@ -192,7 +192,7 @@ class DataBase:
         response = []
         collection = self._db.Course
 
-        result = collection.delete_one({"toDepartments": idDep,
+        result = collection.delete_one({"idDepartment": idDep,
                                         "number": number})
         row = {
             "flag": 'true', }
