@@ -100,8 +100,9 @@ def addCourseToDepartment():
     specialty = request.args.get('specialty')
     toDepartments = request.args.get('toDepartments')
     course = Course()
+    # idDep, name, number, numberOfHour, type, year, sem,toDepartments , flag,specialty
     response = course.add_course_to_dep(idDep, name, number, numberOfHour,
-                                          type, year, sem, flag,toDepartments,specialty)
+                                          type, year, sem,toDepartments, flag,specialty)
     return jsonify({'response': response})
 
 

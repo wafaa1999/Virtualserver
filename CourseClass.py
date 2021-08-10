@@ -135,6 +135,7 @@ class Course:
            if result[i]['number'] == number and idDep == result[i]['idDepartment']:
                flag1 = False
        if flag1:
+           # idDep, name, number, numberOfHour, type, year, sem, flag,toDepartments,specialty
            response = self._database.add_course_to_dep(idDep, name, number, numberOfHour, type, year, sem, flag,toDepartments,specialty)
        else:
            response.append("0")
