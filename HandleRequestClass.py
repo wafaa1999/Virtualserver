@@ -235,12 +235,14 @@ def addInstToDepartment():
 
     return jsonify({'response': response})
 
+
 @app.route("/deleteInsFromDep", methods=['GET'])
 def deleteInstFromDep():
     idDep = request.args.get('idDep')
     name = request.args.get('name')
     response = Instructor().delete_Inst_to_dep(idDep, name)
     return jsonify({'response': response})
+
 
 @app.route("/deleteCourseFromDep", methods=['GET'])
 def deleteCourseFromDep():
