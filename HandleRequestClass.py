@@ -51,7 +51,7 @@ def checkAndSendEmail():
         response.append(row)
         return jsonify({'response': response})
     else:
-        characters = string.ascii_letters + string.digits + string.punctuation
+        characters = string.ascii_letters + string.digits
         passwordCode = ''.join(random.choice(characters) for i in range(8))
         msg = "Use this code to reset your password :" + passwordCode
         subject = "Reset Password"
@@ -217,7 +217,22 @@ def addInstToDepartment():
     response = []
     idDep = request.args.get('idDep')
     name = request.args.get('name')
+    email = request.args.get('email')
+    gender = request.args.get('gender')
     response = Instructor().add_Inst_to_dep(idDep, name)
+    if (response != 'false'):
+        characters = string.ascii_letters + string.digits
+        characters1 = string.digits
+        userName = ''.join(random.choice(characters1) for i in range(8))
+        passwordCode = ''.join(random.choice(characters) for i in range(8))
+        msg = "Use this userName" + userName + " and password to login to the system " + passwordCode
+        subject = "Welcome to the system!"
+        email = email
+        message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
+        message.body = msg
+        mail.send(message)
+        DataBase().add_to_user(idDep, name, email, gender, userName, passwordCode)
+
     return jsonify({'response': response})
 
 @app.route("/deleteInsFromDep", methods=['GET'])
@@ -234,9 +249,13 @@ def deleteCourseFromDep():
     response = Course().delete_Course_from_dep(idDep, number)
     return jsonify({'response': response})
 
-
+@app.route("/getUsers", methods=['GET'])
+def redirect_getUsers():
+    idDep = request.args.get('idDep')
+    response = DataBase().get_user( idDep)
+    return jsonify({'response': response})
 
 
 
 if __name__ == "__main__":
-    app.run(debug=True ,port= 3500)
+    app.run(debug=True ,host='0.0.0.0',port= 3500)

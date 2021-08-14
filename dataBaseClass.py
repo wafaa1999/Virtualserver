@@ -31,6 +31,47 @@ class DataBase:
             result.append(i)
         return result
 
+    def get_user(self, idDep):
+        response = []
+        result = self.get_data_from_user()
+        for i in range(len(result)):
+            if result[i]['idDep'] == idDep:
+                row = dict(
+                    idDep=idDep,
+                    gender=result[i]['gender'],
+                    type=result[i]['type'],
+                    name=result[i]['name'],
+                    id=result[i]['userName']
+                    )
+                response.append(row)
+
+        return  response
+
+    def add_to_user(self, idDep, name, email, gender, userName, passwordCode):
+        collection1 = self.get_data_from_Inst()
+        for i in range(len(collection1)):
+            if collection1[i]['name'] == name and collection1[i]['idDepartment'] == idDep:
+                result = str(collection1[i]['_id'])
+                break
+
+        collection = self._db.User
+        row = {
+            "userName":userName ,
+            "password": passwordCode,
+            "email": email,
+            "type": 'normal',
+            "gender": gender,
+            "name": name,
+            "idDep": idDep,
+            "idInstructor": result,
+
+        }
+
+        result = collection.insert_one(row)
+
+
+
+
     def get_data_from_dep(self):
         collection = self._db.Department
         result = []
@@ -199,9 +240,10 @@ class DataBase:
         response.append(row)
         return response
 
-#     def updatcourse(self):
-#         collection = self._db["Room"]
-#         collection.update_many({}, {"$set": {"name": "قاعة تدريس"}}, upsert=False, array_filters=None)
+    # def updatcourse(self):
+    #
+    #     collection = self._db["Inst"]
+    #     collection.update_many({}, {"$set": {"type": "قاعة تدريس"}}, upsert=False, array_filters=None)
 #
 #
-# d = DataBase().updatcourse()
+# d = DataBase().add_to_user(idDep, name, email, gender, userName, passwordCode)
