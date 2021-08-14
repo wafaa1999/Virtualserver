@@ -17,7 +17,8 @@ class DataBase:
         if flag:
             row = {
                 "idDepartment": idDep,
-                "name": name
+                "name": name,
+                "type": 'normal',
             }
             result = collection.insert_one(row)
             return 'true'
@@ -240,10 +241,10 @@ class DataBase:
         response.append(row)
         return response
 
-    # def updatcourse(self):
-    #
-    #     collection = self._db["Inst"]
-    #     collection.update_many({}, {"$set": {"type": "قاعة تدريس"}}, upsert=False, array_filters=None)
+#     def updatcourse(self):
+#
+#         collection = self._db["Instructor"]
+#         collection.update_many({}, {"$set": {"type": 'normal'}}, upsert=False, array_filters=None)
 #
 #
-# d = DataBase().add_to_user(idDep, name, email, gender, userName, passwordCode)
+# d = DataBase().updatcourse()
