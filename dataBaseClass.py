@@ -227,6 +227,16 @@ class DataBase:
                                })
         row = {
             "flag": 'true', }
+
+        collection1 = self._db.User
+
+        result1 = collection1.delete_one({"idDep": idDep,
+                                        "name": name
+                                        })
+        row = {
+            "flag": 'true', }
+
+
         response.append(row)
         return response
 
