@@ -36,7 +36,7 @@ class DataBase:
         response = []
         result = self.get_data_from_user()
         for i in range(len(result)):
-            if result[i]['idDep'] == idDep or result[i]['type'] == 'head' or result[i]['type'] == 'head of department' :
+            if result[i]['idDep'] == idDep or result[i]['type'] == 'head' or result[i]['type'] == 'head of department':
                 row = dict(
                     idDep=idDep,
                     gender=result[i]['gender'],
