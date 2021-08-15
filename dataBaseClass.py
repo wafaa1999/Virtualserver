@@ -64,7 +64,7 @@ class DataBase:
             "gender": gender,
             "name": name,
             "idDep": idDep,
-            "idInstructor": result,
+            "idIstructor": result,
 
         }
 
@@ -92,11 +92,10 @@ class DataBase:
     def update_password_for_Inst(self, instID, passwordCode):
         oldValue = []
         newValue = []
-        collection = self._db["User"]
-        for i in collection.find():
-            if instID == i['idIstructor']:
-                doc = collection.find_one_and_update(
-                    {"idInstructor": instID},
+        collection = self._db.User
+        doc = collection.find_one_and_update(
+                    {"idIstructor": instID},
+
                     {"$set":
                          {"password": passwordCode}
                      }, upsert=True
