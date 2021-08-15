@@ -13,9 +13,9 @@ class User:
 
         for i in range(len(userData)):
             if idUser == userData[i]['userName'] and password == userData[i]['password']:
-                inst = self._database.get_instrctor(userData[i]['idInstructor'])
+                inst = self._database.get_instrctor(userData[i]['idIstructor'])
                 for j in range(len(depData)):
-                    if  inst[0]['idDepartment'] == str(depData[j]['_id']):
+                    if inst[0]['idDepartment'] == str(depData[j]['_id']):
                         flag = False
                         row = dict(
                             idDep=inst[0]['idDepartment'],
@@ -55,7 +55,7 @@ class User:
             if email == val:
                 flag = False
                 row = dict(
-                    idIstructor=userData[i]['idInstructor'],
+                    idIstructor=userData[i]['idIstructor'],
                     email=userData[i]['email'],
                 )
                 response.append(row)

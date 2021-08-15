@@ -36,7 +36,7 @@ class DataBase:
         response = []
         result = self.get_data_from_user()
         for i in range(len(result)):
-            if result[i]['idDep'] == idDep or result[i]['type'] == 'head':
+            if result[i]['idDep'] == idDep or result[i]['type'] == 'head' or result[i]['type'] == 'head of department' :
                 row = dict(
                     idDep=idDep,
                     gender=result[i]['gender'],
@@ -94,7 +94,7 @@ class DataBase:
         newValue = []
         collection = self._db["User"]
         for i in collection.find():
-            if instID == i['idInstructor']:
+            if instID == i['idIstructor']:
                 doc = collection.find_one_and_update(
                     {"idInstructor": instID},
                     {"$set":
