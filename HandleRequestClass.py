@@ -257,7 +257,10 @@ def redirect_getUsers():
     response = DataBase().get_user( idDep)
     return jsonify({'response': response})
 
-
+@app.route("/getAllUsers", methods=['GET'])
+def redirect_getAllUser():
+    response = DataBase().get_data_from_user1()
+    return jsonify({'response': response})
 
 if __name__ == "__main__":
     app.run(debug=True ,host='0.0.0.0',port= 3500)

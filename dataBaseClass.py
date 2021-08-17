@@ -32,6 +32,21 @@ class DataBase:
             result.append(i)
         return result
 
+    def get_data_from_user1(self):
+        collection = self._db.User
+        result = []
+        for i in collection.find():
+            row = dict(
+                idDep=i['idDep'],
+                gender=i['gender'],
+                type=i['type'],
+                name=i['name'],
+                id=i['userName']
+            )
+            result.append(row)
+        return result
+
+
     def get_user(self, idDep):
         response = []
         result = self.get_data_from_user()
