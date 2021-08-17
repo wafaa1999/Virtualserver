@@ -225,12 +225,12 @@ def addInstToDepartment():
         characters1 = string.digits
         userName = ''.join(random.choice(characters1) for i in range(8))
         passwordCode = ''.join(random.choice(characters) for i in range(8))
-        msg = "Use this userName" + userName + " and password to login to the system " + passwordCode
-        subject = "Welcome to the system!"
-        email = email
-        message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
-        message.body = msg
-        mail.send(message)
+        # msg = "Use this userName" + userName + " and password to login to the system " + passwordCode
+        # subject = "Welcome to the system!"
+        # email = email
+        # message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
+        # message.body = msg
+        # mail.send(message)
         DataBase().add_to_user(idDep, name, email, gender, userName, passwordCode)
 
     return jsonify({'response': response})

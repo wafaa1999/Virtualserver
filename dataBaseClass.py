@@ -49,6 +49,7 @@ class DataBase:
         return  response
 
     def add_to_user(self, idDep, name, email, gender, userName, passwordCode):
+        # idDep, name, email, gender, userName, passwordCode
         collection1 = self.get_data_from_Inst()
         for i in range(len(collection1)):
             if collection1[i]['name'] == name and collection1[i]['idDepartment'] == idDep:
