@@ -60,7 +60,8 @@ class DataBase:
                     type=result[i]['type'],
                     name=result[i]['name'],
                     id=result[i]['userName'],
-                    picked=result[i]['picked']
+                    picked=result[i]['picked'],
+                    email=result[i]['email']
 
                     )
                 response.append(row)
