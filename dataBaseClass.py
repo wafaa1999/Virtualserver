@@ -41,7 +41,9 @@ class DataBase:
                 gender=i['gender'],
                 type=i['type'],
                 name=i['name'],
-                id=i['userName']
+                id=i['userName'],
+                email=i['email'],
+                picked=i['picked']
             )
             result.append(row)
         return result
@@ -57,7 +59,9 @@ class DataBase:
                     gender=result[i]['gender'],
                     type=result[i]['type'],
                     name=result[i]['name'],
-                    id=result[i]['userName']
+                    id=result[i]['userName'],
+                    picked=result[i]['picked']
+
                     )
                 response.append(row)
 
@@ -81,6 +85,7 @@ class DataBase:
             "name": name,
             "idDep": idDep,
             "idIstructor": result,
+            "picked":'false'
 
         }
 
@@ -116,6 +121,18 @@ class DataBase:
                          {"password": passwordCode}
                      }, upsert=True
                 )
+
+    def edit_picker(self, userName):
+        collection = self._db.User
+        doc = collection.find_one_and_update(
+            {"userName": userName},
+
+            {"$set":
+                 {"picked": 'true'}
+             }, upsert=True
+        )
+        return 'true'
+
 
     def get_courses_of_dep(self, idDep):
         collection = self._db.Course
@@ -268,8 +285,8 @@ class DataBase:
 
 #     def updatcourse(self):
 #
-#         collection = self._db["Instructor"]
-#         collection.update_many({}, {"$set": {"type": 'normal'}}, upsert=False, array_filters=None)
+#         collection = self._db["User"]
+#         collection.update_many({}, {"$set": {"picked": 'false'}}, upsert=False, array_filters=None)
 #
 #
 # d = DataBase().updatcourse()

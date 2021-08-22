@@ -16,7 +16,7 @@ app = Flask(__name__)
 CORS(app)
 cors = CORS(app, resources={
     r"/*": {
-        "origins" : "*"
+        "origins": "*"
     }
 })
 
@@ -69,6 +69,68 @@ def checkAndSendEmail():
         return jsonify({'response': response})
 
 
+@app.route("/SendNotification", methods=['GET'])
+def SendNotification():
+    idDep = request.args.get('idDep')
+    note = request.args.get('note')
+    flag = request.args.get('flag')
+    result = DataBase().get_data_from_user1()
+
+    try:
+        if flag == '1':
+            # من رئيس قسم لدكاترته
+            for i in range(len(result)):
+                if result[i]['idDep'] == idDep and result[i]['type'] == 'normal':
+                    if result[i]['email'] == 'wafaa199.wd@gmail.com':
+                        msg = note
+                        subject = "Notification"
+                        email = result[i]['email']
+                        message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
+                        message.body = msg
+                        mail.send(message)
+
+
+        elif flag == '2':
+            # من العميد لرؤساء الاقسام
+            for m in range(len(result)):
+                if result[m]['type'] == 'head of department':
+                    if result[m]['email'] == 'wafaa199.wd@gmail.com':
+                        msg = note
+                        subject = "Notification"
+                        email = result[m]['email']
+                        message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
+                        message.body = msg
+                        mail.send(message)
+
+
+        elif flag == '3':
+            # من العميد لدكاترة
+            for k in range(len(result)):
+                if result[k]['type'] == 'normal':
+                    if result[k]['email'] == 'wafaa199.wd@gmail.com':
+                        msg = note
+                        subject = "Notification"
+                        email = result[k]['email']
+                        message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
+                        message.body = msg
+                        mail.send(message)
+
+        elif flag == '4':
+            for m in range(len(result)):
+                if result[m]['type'] == 'head of department' and result[m]['idDepartment'] == idDep:
+                    if result[m]['email'] == 'wafaa199.wd@gmail.com':
+                        msg = note
+                        subject = "Notification"
+                        email = result[m]['email']
+                        message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
+                        message.body = msg
+                        mail.send(message)
+        response = "true"
+    except:
+        response = 'false'
+    return jsonify({'response': response})
+
+
 @app.route("/getMaterialsOfDepartment", methods=['GET'])
 def getMaterialsOfDepartment():
     course = Course()
@@ -102,13 +164,13 @@ def addCourseToDepartment():
     course = Course()
     # idDep, name, number, numberOfHour, type, year, sem,toDepartments , flag,specialty
     response = course.add_course_to_dep(idDep, name, number, numberOfHour,
-                                          type, year, sem,toDepartments, flag,specialty)
+                                        type, year, sem, toDepartments, flag, specialty)
     return jsonify({'response': response})
 
 
 @app.route("/editRoom", methods=['GET'])
 def editRoom():
-    response =[]
+    response = []
     idDep = request.args.get('idDep')
     number = request.args.get('number')
     campous = request.args.get('campous')
@@ -116,7 +178,7 @@ def editRoom():
     name = request.args.get('name')
 
     room1 = Room()
-    result = room1.update_room(idDep,number,campous,type, name)
+    result = room1.update_room(idDep, number, campous, type, name)
     row = dict(
         state=result, )
     response.append(row)
@@ -125,7 +187,7 @@ def editRoom():
 
 @app.route("/getAllMaterialsOfDepartment", methods=['GET'])
 def getAllMaterialsOfDepartment():
-    response =[]
+    response = []
     idDep = request.args.get('idDep')
     course2 = Course()
     response = course2.get_all_materials_of_department(idDep)
@@ -161,7 +223,7 @@ def deleteRoomFromDep():
     idDep = request.args.get('idDep')
     number = request.args.get('number')
     room2 = Room()
-    result= room2.delete_room(idDep,number)
+    result = room2.delete_room(idDep, number)
     row = dict(
         stat=result
     )
@@ -173,18 +235,16 @@ def deleteRoomFromDep():
 
 @app.route("/getDep", methods=['GET'])
 def getDep():
-
     user = request.args.get('username')
     passs = request.args.get('passs')
-    data5 =User()
-    response = data5.get_dep(user,passs)
+    data5 = User()
+    response = data5.get_dep(user, passs)
     return jsonify({'response': response})
-
 
 
 @app.route("/getAllIsn", methods=['GET'])
 def getAllIsn():
-    response =[]
+    response = []
     idDep = request.args.get('idDep')
     inst2 = Instructor()
     response = inst2.get_all_inst_of_department(idDep)
@@ -194,14 +254,15 @@ def getAllIsn():
 @app.route("/getAllDep", methods=['GET'])
 def getAllDep():
     dep = Department()
-    response =dep.get_all_dep()
+    response = dep.get_all_dep()
     return jsonify({'response': response})
+
 
 @app.route("/getMatOfSpeDep", methods=['GET'])
 def getMatOfSpeDep():
     idDep = request.args.get('idDep')
     id = request.args.get('id')
-    response = Course().get_all_materials_of_sep_dep(idDep,id)
+    response = Course().get_all_materials_of_sep_dep(idDep, id)
     return jsonify({'response': response})
 
 
@@ -211,6 +272,7 @@ def getRoomCat():
     room1 = Room()
     response = room1.getCat(idDep)
     return jsonify({'response': response})
+
 
 @app.route("/addInstToDepartment", methods=['GET'])
 def addInstToDepartment():
@@ -251,16 +313,29 @@ def deleteCourseFromDep():
     response = Course().delete_Course_from_dep(idDep, number)
     return jsonify({'response': response})
 
+
 @app.route("/getUsers", methods=['GET'])
 def redirect_getUsers():
     idDep = request.args.get('idDep')
-    response = DataBase().get_user( idDep)
+    response = DataBase().get_user(idDep)
     return jsonify({'response': response})
+
 
 @app.route("/getAllUsers", methods=['GET'])
 def redirect_getAllUser():
     response = DataBase().get_data_from_user1()
     return jsonify({'response': response})
 
+
+@app.route("/editPicked", methods=['GET'])
+def editPiked():
+    response = []
+    userName = request.args.get('userName')
+    response = DataBase().edit_picker(userName)
+    return jsonify({'response': response})
+
+
+
+
 if __name__ == "__main__":
-    app.run(debug=True ,host='0.0.0.0',port= 3500)
+    app.run(debug=True, host='0.0.0.0', port=3500)
