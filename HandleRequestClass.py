@@ -53,8 +53,8 @@ def checkAndSendEmail():
     else:
         characters = string.ascii_letters + string.digits
         passwordCode = ''.join(random.choice(characters) for i in range(8))
-        msg = "Use this code to reset your password :" + passwordCode
-        subject = "Reset Password"
+        msg = "استخدم الكود الاتي للحصول على كلمة مرور جديدة" + passwordCode
+        subject = "هل نسيت كلمة المرور ؟"
         email = response[0]['email']
         message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
         message.body = msg
@@ -62,11 +62,64 @@ def checkAndSendEmail():
 
         row = dict(
             state='Done',
-            idIstructor=response[0]['idIstructor'])
+            idIstructor=response[0]['idIstructor'],
+        code= passwordCode)
+        response.clear()
+        response.append(row)
+        # user1.update_password(response[0]['idIstructor'], passwordCode)
+        user1.set_code(response[0]['idIstructor'], passwordCode)
+        return jsonify({'response': response})
+
+@app.route('/sendEmailWithPassword', methods=['Get'])
+def sendEmailWithPassword():
+    email = request.args.get('email')
+    code = request.args.get('code')
+    print(email)
+    user1 = User()
+    response = user1.check_email(email)
+    if response[0]['email'] == "None":
+        row = dict(
+            state='Failed', )
+        response.clear()
+        response.append(row)
+        return jsonify({'response': response})
+    elif response[0]['code'] == code:
+        characters = string.ascii_letters + string.digits
+        passwordCode = ''.join(random.choice(characters) for i in range(8))
+        msg = "كلمة المرور الجديدة:" + passwordCode + "تستطيع تغييرها عند الدخول الي النظام"
+        subject = "هل نسيت كلمة المرور ؟"
+        email = response[0]['email']
+        message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
+        message.body = msg
+        mail.send(message)
+
+        row = dict(
+            state='Done',
+            idIstructor=response[0]['idIstructor'],
+            password=passwordCode)
         response.clear()
         response.append(row)
         user1.update_password(response[0]['idIstructor'], passwordCode)
+        # user1.set_code(response[0]['idIstructor'], passwordCode)
         return jsonify({'response': response})
+    else:
+        row = dict(
+            state='Failed', )
+        response.clear()
+        response.append(row)
+        return jsonify({'response': response})
+
+@app.route("/updatePassword", methods=['GET'])
+def updatePassword():
+    userName = request.args.get('userName')
+    new = request.args.get('new')
+    old = request.args.get('old')
+    response = DataBase().update_pass(userName, old, new)
+    return jsonify({'response': response})
+
+
+
+
 
 
 @app.route("/SendNotification", methods=['GET'])

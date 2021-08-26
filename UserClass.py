@@ -57,6 +57,7 @@ class User:
                 row = dict(
                     idIstructor=userData[i]['idIstructor'],
                     email=userData[i]['email'],
+                    code =userData[i]['code']
                 )
                 response.append(row)
         if flag:
@@ -69,3 +70,6 @@ class User:
 
     def update_password(self, instID, passwordCode):
         self._database.update_password_for_Inst(instID, passwordCode)
+
+    def set_code(self, instID, passwordCode):
+        self._database.set_code(instID, passwordCode)

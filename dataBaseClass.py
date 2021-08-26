@@ -43,7 +43,8 @@ class DataBase:
                 name=i['name'],
                 id=i['userName'],
                 email=i['email'],
-                picked=i['picked']
+                picked=i['picked'],
+                code=i['code']
             )
             result.append(row)
         return result
@@ -61,7 +62,8 @@ class DataBase:
                     name=result[i]['name'],
                     id=result[i]['userName'],
                     picked=result[i]['picked'],
-                    email=result[i]['email']
+                    email=result[i]['email'],
+                    code=result[i]['code']
 
                     )
                 response.append(row)
@@ -86,7 +88,8 @@ class DataBase:
             "name": name,
             "idDep": idDep,
             "idIstructor": result,
-            "picked":'false'
+            "picked":'false',
+            "code":'00000000'
 
         }
 
@@ -109,7 +112,15 @@ class DataBase:
             result.append(i)
         return result
 
+    def set_code(self, instID, passwordCode):
+        collection = self._db.User
+        doc = collection.find_one_and_update(
+            {"idIstructor": instID},
 
+            {"$set":
+                 {"code": passwordCode}
+             }, upsert=True
+        )
 
     def update_password_for_Inst(self, instID, passwordCode):
         oldValue = []
@@ -122,6 +133,26 @@ class DataBase:
                          {"password": passwordCode}
                      }, upsert=True
                 )
+
+    def update_pass(self, userName, old, new):
+        collection = self._db.User
+        flag = False
+        for i in collection.find():
+            if i['userName'] == userName and i['password'] == old:
+                flag = True
+        if flag:
+            doc = collection.find_one_and_update(
+                {"userName": userName,
+                 "password": old},
+
+                {"$set":
+                     {"password": new}
+                 }, upsert=True
+            )
+            return flag
+        return  flag
+
+
 
     def edit_picker(self, userName):
         collection = self._db.User
@@ -287,7 +318,7 @@ class DataBase:
 #     def updatcourse(self):
 #
 #         collection = self._db["User"]
-#         collection.update_many({}, {"$set": {"picked": 'false'}}, upsert=False, array_filters=None)
+#         collection.update_many({}, {"$set": {"code": '00000000'}}, upsert=False, array_filters=None)
 #
 #
 # d = DataBase().updatcourse()
