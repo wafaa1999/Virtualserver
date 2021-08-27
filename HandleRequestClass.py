@@ -335,13 +335,13 @@ def addInstToDepartment():
     email = request.args.get('email')
     gender = request.args.get('gender')
     response = Instructor().add_Inst_to_dep(idDep, name)
-    if (response != 'false'):
+    if (response != False):
         characters = string.ascii_letters + string.digits
         characters1 = string.digits
         userName = ''.join(random.choice(characters1) for i in range(8))
         passwordCode = ''.join(random.choice(characters) for i in range(8))
-        msg = "يمكنك استخدام اسم المستخدم الاتي :" + userName +  +"\n"+" وكلمة المرور الاتية للدخول الى النظام" + passwordCode
-        subject = "Welcome to the system!"
+        msg = "يمكنك استخدام اسم المستخدم الاتي :" + userName  +"\n"+" وكلمة المرور الاتية للدخول الى النظام" + passwordCode
+        subject = "اهلا بك في Scheduler"
         email = email
         message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
         message.body = msg
