@@ -51,10 +51,10 @@ def checkAndSendEmail():
         response.append(row)
         return jsonify({'response': response})
     else:
-        characters = string.ascii_letters + string.digits
+        characters = string.ascii_letters
         passwordCode = ''.join(random.choice(characters) for i in range(8))
-        msg = "استخدم الكود الاتي للحصول على كلمة مرور جديدة" + passwordCode
-        subject = "هل نسيت كلمة المرور ؟"
+        msg = "استخدم الكود الاتي للحصول على كلمة مرور جديدة: " + passwordCode
+        subject = "استعادة كلمة المرور"
         email = response[0]['email']
         message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
         message.body = msg
@@ -84,10 +84,10 @@ def sendEmailWithPassword():
         response.append(row)
         return jsonify({'response': response})
     elif response[0]['code'] == code:
-        characters = string.ascii_letters + string.digits
+        characters = string.ascii_letters
         passwordCode = ''.join(random.choice(characters) for i in range(8))
         msg = "كلمة المرور الجديدة:" + passwordCode + "تستطيع تغييرها عند الدخول الي النظام"
-        subject = "هل نسيت كلمة المرور ؟"
+        subject = "استعادة كلمة المرور"
         email = response[0]['email']
         message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
         message.body = msg
@@ -336,12 +336,12 @@ def addInstToDepartment():
     gender = request.args.get('gender')
     response = Instructor().add_Inst_to_dep(idDep, name)
     if (response != False):
-        characters = string.ascii_letters + string.digits
+        characters = string.ascii_letters
         characters1 = string.digits
         userName = ''.join(random.choice(characters1) for i in range(8))
         passwordCode = ''.join(random.choice(characters) for i in range(8))
-        msg = "يمكنك استخدام اسم المستخدم الاتي :" + userName  +"\n"+" وكلمة المرور الاتية للدخول الى النظام" + passwordCode
-        subject = "اهلا بك في Scheduler"
+        msg = "اهلا بك في Scheduler"+"\n"+"يمكنك استخدام اسم المستخدم الاتي :" + userName  +"\n"+" وكلمة المرور الاتية للدخول الى النظام" + passwordCode
+        subject = "مستخدم جديد"
         email = email
         message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
         message.body = msg
