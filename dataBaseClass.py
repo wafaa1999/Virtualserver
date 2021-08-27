@@ -21,9 +21,8 @@ class DataBase:
                 "type": 'normal',
             }
             result = collection.insert_one(row)
-            return 'true'
-        else:
-          return 'false'
+
+        return flag
 
     def get_data_from_user(self):
         collection = self._db.User
