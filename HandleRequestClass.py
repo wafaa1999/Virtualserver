@@ -69,6 +69,26 @@ def checkAndSendEmail():
         # user1.update_password(response[0]['idIstructor'], passwordCode)
         user1.set_code(response[0]['idIstructor'], passwordCode)
         return jsonify({'response': response})
+@app.route("/intiState", methods=['GET'])
+def intiState():
+    inst = DataBase().get_data_from_Inst()
+    response = 'true'
+    for i in range(len(inst)):
+        characters = string.ascii_letters
+        characters1 = string.digits
+        userName = ''.join(random.choice(characters1) for i in range(8))
+        passwordCode = ''.join(random.choice(characters) for i in range(8))
+        msg = "اهلا بك في Scheduler" + "\n" + "يمكنك استخدام اسم المستخدم الاتي :" + userName + "\n" + " وكلمة المرور الاتية للدخول الى النظام" + passwordCode
+        subject = "مستخدم جديد"
+        email = inst[i]['email']
+        message = Message(subject, sender="company.employee.99@gmail.com", recipients=email.split())
+        message.body = msg
+        mail.send(message)
+        DataBase().add_to_user(inst[0]['idDepartment'],inst[0]['name'], inst[i]['email'], inst[i]['gender'], userName, passwordCode)
+
+    return jsonify({'response': response})
+
+
 
 @app.route('/sendEmailWithPassword', methods=['Get'])
 def sendEmailWithPassword():
@@ -134,7 +154,7 @@ def SendNotification():
             # من رئيس قسم لدكاترته
             for i in range(len(result)):
                 if result[i]['idDep'] == idDep and result[i]['type'] == 'normal':
-                    if result[i]['email'] == 'wafaa199.wd@gmail.com':
+                    if result[i]['email'] != '':
                         msg = note
                         subject = "Notification"
                         email = result[i]['email']
@@ -147,7 +167,7 @@ def SendNotification():
             # من العميد لرؤساء الاقسام
             for m in range(len(result)):
                 if result[m]['type'] == 'head of department':
-                    if result[m]['email'] == 'wafaa199.wd@gmail.com':
+                    if result[m]['email'] != '':
                         msg = note
                         subject = "Notification"
                         email = result[m]['email']
@@ -160,7 +180,7 @@ def SendNotification():
             # من العميد لدكاترة
             for k in range(len(result)):
                 if result[k]['type'] == 'normal':
-                    if result[k]['email'] == 'wafaa199.wd@gmail.com':
+                    if result[k]['email'] != '':
                         msg = note
                         subject = "Notification"
                         email = result[k]['email']
@@ -171,7 +191,7 @@ def SendNotification():
         elif flag == '4':
             for m in range(len(result)):
                 if result[m]['type'] == 'head of department' and result[m]['idDepartment'] == idDep:
-                    if result[m]['email'] == 'wafaa199.wd@gmail.com':
+                    if result[m]['email'] != '':
                         msg = note
                         subject = "Notification"
                         email = result[m]['email']
@@ -334,7 +354,7 @@ def addInstToDepartment():
     name = request.args.get('name')
     email = request.args.get('email')
     gender = request.args.get('gender')
-    response = Instructor().add_Inst_to_dep(idDep, name)
+    response = Instructor().add_Inst_to_dep(idDep, name,email,gender)
     if (response != False):
         characters = string.ascii_letters
         characters1 = string.digits

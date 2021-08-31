@@ -24,8 +24,8 @@ class Instructor:
                              response.append(row)
         return response
 
-    def add_Inst_to_dep(self, idDep, name):
-        response = self._database.add_inst_to_deprtment( idDep, name)
+    def add_Inst_to_dep(self, idDep, name,email,gender):
+        response = self._database.add_inst_to_deprtment( idDep, name,email,gender)
         return response
 
     def delete_Inst_to_dep(self, idDep, name):

@@ -6,7 +6,7 @@ class DataBase:
         Client = MongoClient('mongodb+srv://WD-project:wafaa12345@cluster0.v5htd.mongodb.net/test')
         self._db = Client['Schedule']
 
-    def add_inst_to_deprtment(self, idDep, name):
+    def add_inst_to_deprtment(self, idDep, name,email,gender):
         collection = self._db.Instructor
         flag = True
         res = self.get_data_from_Inst()
@@ -19,6 +19,8 @@ class DataBase:
                 "idDepartment": idDep,
                 "name": name,
                 "type": 'normal',
+                "email": email,
+                "gender":gender
             }
             result = collection.insert_one(row)
 
@@ -316,8 +318,8 @@ class DataBase:
 
 #     def updatcourse(self):
 #
-#         collection = self._db["User"]
-#         collection.update_many({}, {"$set": {"code": '00000000'}}, upsert=False, array_filters=None)
+#         collection = self._db["Instructor"]
+#         collection.update_many({}, {"$set": {"gender": 'ذكر'}}, upsert=False, array_filters=None)
 #
 #
 # d = DataBase().updatcourse()
